@@ -6,8 +6,8 @@ export default class AuthService {
         this.userManager = new UserManager(userManagerConfig);
 
         this.userManager.events.addUserLoaded(user => {
-            console.log('auth');
             console.log('user', user);
+            // set token_id to cookies
         });
 
         this.userManager.events.addAccessTokenExpired(() => {
@@ -28,17 +28,6 @@ export default class AuthService {
     };
 
     signinRedirectCallback = () => {
-        this.userManager.signinRedirectCallback().then((resp) => {
-            console.log('resp', resp);
-            // set id_token to cookie
-        });
-    };
-
-    signinSilentCallback = () => {
-        this.userManager.signinSilentCallback();
-    };
-
-    createSigninRequest = () => {
-        return this.userManager.createSigninRequest();
+        this.userManager.signinRedirectCallback();
     };
 }

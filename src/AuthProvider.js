@@ -4,8 +4,6 @@ import AuthService from "./AuthService";
 const AuthContext = React.createContext({
     signinRedirect: () => ({}),
     signinRedirectCallback: () => ({}),
-    signinSilentCallback: () => ({}),
-    createSigninRequest: () => ({})
 });
 
 export const AuthConsumer = AuthContext.Consumer;
