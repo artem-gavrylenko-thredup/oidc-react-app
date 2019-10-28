@@ -5,22 +5,18 @@ export default class AuthService {
     constructor() {
         this.userManager = new UserManager(userManagerConfig);
 
-        this.userManager.events.addUserLoaded(user => {
-            console.log('user', user);
-            // set token_id to cookies
-        });
+        this.userManager.events.addUserLoaded(this.updateToken);
 
         this.userManager.events.addAccessTokenExpired(() => {
             console.log("token expired");
 
-            this.userManager.signinSilent()
-                .then(user => {
-                    console.log("signed in", user);
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            this.userManager.signinSilent().then(this.updateToken);
         });
+    }
+
+    updateToken(user) {
+        console.log('user', user);
+        // set token_id to cookies
     }
 
     signinRedirect = () => {
